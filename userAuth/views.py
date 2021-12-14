@@ -14,7 +14,7 @@ from django.contrib import messages
 
 def login(request):
     if request.session.get('user_id'):
-        return redirect('userPage:home')
+        return redirect('userPage:request')
     if request.method == 'POST':
         id = request.POST.get('idInput', '')
         pw = request.POST.get('pwInput', '')
@@ -37,6 +37,8 @@ def login(request):
 
 
 def signin(request):
+    if request.session.get('user_id'):
+        return redirect('userPage:request')
     if request.method=='POST':
         id = request.POST.get('id', '')
         pw = request.POST.get('pw', '')
