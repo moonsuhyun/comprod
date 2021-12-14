@@ -1,0 +1,31 @@
+{% extends "adminPage/base.html" %}
+{% block contents %}
+    <form method="post" class="form-group" id="appendForm" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table class="table table-borderless">
+        <tr>
+            <th>물품명</th>
+            <td><input type="text" class="form-control" name="name" placeholder="{{ currentProduct.name }}"></td>
+        </tr>
+        <tr>
+            <th>분류</th>
+            <td><input type="text" class="form-control" name="cls" placeholder="{{ currentProduct.cls }}"></td>
+        </tr>
+        <tr>
+            <th>재고수량</th>
+            <td><input type="number" class="form-control" name="stock" placeholder="{{ currentProduct.stock }}"></td>
+        </tr>
+        <tr>
+            <th>물품사진</th>
+            <td>
+                <img height="300px" src="{{ currentProduct.image.url }}" alt="{{ currentProduct.name }}">
+                <input class="form-control" type="file" name="image">
+            </td>
+        </tr>
+        <tr>
+            <td><button type="button" class="btn btn-link" onclick="location.href='{% url 'adminPage:userDetailDelete' currentProduct.id %}';">사용자 삭제</button></td>
+            <td align="right"><button type="submit" class="btn btn-primary">물품 정보 변경</button></td>
+        </tr>
+    </table>
+    </form>
+{% endblock %}

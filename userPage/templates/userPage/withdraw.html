@@ -1,0 +1,13 @@
+{% extends 'userPage/base.html' %}
+{% block contents %}
+<form method="post">
+    {% csrf_token %}
+    <table class="table">
+        <tr>
+            <th>비밀번호</th>
+            <td><input type="password" class="form-control" name="pw"></td>
+            <td><button type="submit" class="btn btn-danger">회원탈퇴</button></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

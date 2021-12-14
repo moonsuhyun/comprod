@@ -1,0 +1,36 @@
+{% extends "adminPage/base.html" %}
+{% block contents %}
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">순번</th>
+                <th scope="col">유형</th>
+                <th scope="col">아이디</th>
+                <th scope="col">부서</th>
+                <th scope="col">이름</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in users %}
+                <tr onclick="location.href='{% url 'adminPage:userDetail' u.id %}';">
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>
+                        {% if u.isAdmin %}
+                            관리자
+                        {% else %}
+                            일반사용자
+                        {% endif %}
+                    </td>
+                    <td>{{ u.id }}</td>
+                    <td>{{ u.dept }}</td>
+                    <td>{{ u.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr><td align="right" colspan="5">
+                <button class="btn btn-primary" onclick="location.href='{% url 'adminPage:userAppend' %}'">사용자 추가</button>
+            </td></tr>
+        </tfoot>
+    </table>
+{% endblock %}

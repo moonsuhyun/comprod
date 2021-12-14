@@ -1,0 +1,33 @@
+{% extends "userPage/base.html" %}
+{% block contents %}
+<table class="table table-borderless">
+    <tr>
+        <td rowspan="4" width="30%"><img src="{{ product.image.url }}" alt="{{ product.name }}" height="300px"></td>
+    </tr>
+    <tr>
+        <th>물품명</th>
+        <td>{{ product.name }}</td>
+    </tr>
+    <tr>
+        <th>분류</th>
+        <td>{{ product.cls }}</td>
+    </tr>
+    <tr>
+        <th>재고수량</th>
+        <td>{{ product.stock }}</td>
+    </tr>
+    <tr>
+        <td><button type="button" class="btn btn-link" onclick="location.href='{% url 'userPage:request' %}';">뒤로 가기</button></td>
+        <td align="right" colspan="2">
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" name="quantity" placeholder="신청 수량">
+                    <button class="btn btn-primary" type="button" onclick="this.form.submit()">신청하기</button>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "adminPage/base.html" %}
+{% block contents %}
+    <form method="post" class="form-group">
+    {% csrf_token %}
+    <table class="table table-borderless">
+        <tr>
+            <th>아이디</th>
+            <td><input type="text" readonly class="form-control" name="id" value="{{ currentUser.id }}"></td>
+        </tr>
+        <tr>
+            <th>승인여부</th>
+            <td>
+                <div class="form-check form-switch">
+                    <input type="checkbox" {% if currentUser.id == user.id %}disabled{% endif %} class="form-check-input" id="isConfirmed" name="isConfirmed" value="True" {% if currentUser.isConfirmed %}checked{% endif %}>
+                    <label class="form-check-label" for="isConfirmed"></label>
+                    {% if currentUser.id == user.id %}<input type="hidden" name="isConfirmed" value="True">{% endif %}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>사용자 유형</th>
+            <td>
+                <input type="radio" class="btn-check" name="isAdmin" id="normalUser" autocomplete="off" value="False" {% if currentUser.id == user.id %}disabled{% endif %} {% if not currentUser.isAdmin %}checked{% endif %}>
+                <label class="btn btn-outline-secondary" for="normalUser">일반사용자</label>
+                <input type="radio" class="btn-check" name="isAdmin" id="adminUser" autocomplete="off" value="True" {% if currentUser.isAdmin %}checked{% endif %}>
+                <label class="btn btn-outline-secondary" for="adminUser">관리자</label>
+            </td>
+        </tr>
+        <tr>
+            <th>새 비밀번호</th>
+            <td><input type="password" class="form-control" name="newPW"></td>
+        </tr>
+        <tr>
+            <th>비밀번호 확인</th>
+            <td><input type="password" class="form-control" name="chkPW"></td>
+        </tr>
+        <tr>
+            <th>이름</th>
+            <td><input type="text" class="form-control" name="name" placeholder="{{ currentUser.name }}"></td>
+        </tr>
+        <tr>
+            <th>부서</th>
+            <td><input type="text" class="form-control" name="dept" placeholder="{{ currentUser.dept }}"></td>
+        </tr>
+        <tr>
+            <th>연락처</th>
+            <td><input type="text" class="form-control" name="phone" placeholder="{{ currentUser.phone }}"></td>
+        </tr>
+        <tr>
+            <th>가입 일시</th>
+            <td><input type="text" readonly class="form-control" name="joinDate" value="{{ currentUser.joinDate }}"></td>
+        </tr>
+        <tr>
+            <td><button type="button" {% if currentUser.id == user.id %}disabled{% endif %} class="btn btn-link" onclick="location.href='{% url 'adminPage:userDetailDelete' currentUser.id %}';">사용자 삭제</button></td>
+            <td align="right"><button type="submit" class="btn btn-primary">사용자 정보 변경</button></td>
+        </tr>
+    </table>
+    </form>
+{% endblock %}

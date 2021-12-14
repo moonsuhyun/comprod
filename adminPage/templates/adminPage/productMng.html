@@ -1,0 +1,30 @@
+{% extends "adminPage/base.html" %}
+{% block contents %}
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">물품 번호</th>
+                <th scope="col">분류</th>
+                <th scope="col">물품명</th>
+                <th scope="col">재고 수량</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in products %}
+            <tr onclick="location.href='{% url 'adminPage:productDetail' p.id %}';">
+                <th scope="row">{{ p.id }}</th>
+                <td>{{ p.cls }}</td>
+                <td>{{ p.name }}</td>
+                <td>{{ p.stock }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td align="right" colspan="4">
+                    <button class="btn btn-primary" onclick="location.href='{% url 'adminPage:productAppend' %}'">물품 추가</button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

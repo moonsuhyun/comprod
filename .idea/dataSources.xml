@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="comprod@comprod.suhyun.dev" uuid="ab64351e-6a5c-400c-a633-7ceca4c832cc">
+    <data-source source="LOCAL" name="comprod@dev.comprod.suhyun.dev" uuid="ab64351e-6a5c-400c-a633-7ceca4c832cc">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mariadb://comprod.suhyun.dev:3306/comprod</jdbc-url>
+      <jdbc-url>jdbc:mariadb://dev.comprod.suhyun.dev:3306/comprod</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

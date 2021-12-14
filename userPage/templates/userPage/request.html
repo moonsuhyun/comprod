@@ -1,0 +1,45 @@
+{% extends "userPage/base.html" %}
+{% block contents %}
+{% load templateTags %}
+<form method="post">
+{% csrf_token %}
+    <select class="form-select" name="filter" onchange="this.form.submit()">
+        <option {% if filterSelected == "all" %}selected{% endif %} value="all">전체</option>
+        {% for c in cls %}
+            <option {% if filterSelected == c %}selected{% endif %} value="{{ c }}">{{ c }}</option>
+        {% endfor %}
+    </select>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="search" placeholder="물품명 검색">
+        <button class="btn btn-secondary" type="button" onclick="this.form.submit()">검색</button>
+    </div>
+</form>
+<table class="table" style="padding: 20px;">
+<tr>
+{% if not products %}
+    <script>
+        alert("해당하는 물품이 없습니다.");
+        window.location.href='{% url 'userPage:request' %}';
+    </script>
+{% endif %}
+{% for p in products %}
+    <td style="width: 25%; height: 150px;">
+        <table class="table table-hover table-borderless" style="vertical-align: middle; cursor: default;">
+            <tr onclick="location.href='{% url 'userPage:requestDetail' p.id %}'">
+                <td width="50%">
+                    <img height="130px" src="{{ p.image.url }}" alt="{{ p.name }}">
+                </td>
+                <td width="50%">{{ p.name }}</td>
+            </tr>
+        </table>
+    </td>
+    {% if forloop.counter|add:4|modulo:4 == 0 %}</tr><tr>{% endif %}
+    {% if forloop.last %}
+        {% for values in forloop.counter|add:4|modulo:4|ranges %}
+            <td></td>
+        {% endfor %}
+        </tr>
+    {% endif %}
+{% endfor %}
+</table>
+{% endblock %}

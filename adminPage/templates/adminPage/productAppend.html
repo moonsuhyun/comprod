@@ -1,0 +1,27 @@
+{% extends "adminPage/base.html" %}
+{% block contents %}
+    <form method="post" class="form-group" id="appendForm" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table class="table table-borderless">
+        <tr>
+            <th>물품명</th>
+            <td><input type="text" class="form-control" name="name"></td>
+        </tr>
+        <tr>
+            <th>분류</th>
+            <td><input type="text" class="form-control" name="cls"></td>
+        </tr>
+        <tr>
+            <th>재고수량</th>
+            <td><input type="number" class="form-control" name="stock"></td>
+        </tr>
+        <tr>
+            <th>물품사진</th>
+            <td><input class="form-control" type="file" name="image"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right"><button type="submit" class="btn btn-primary">물품 추가</button></td>
+        </tr>
+    </table>
+    </form>
+{% endblock %}

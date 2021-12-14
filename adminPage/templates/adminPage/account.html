@@ -1,0 +1,43 @@
+{% extends "adminPage/base.html" %}
+{% block contents %}
+    <form method="post" class="form-group">
+    {% csrf_token %}
+    <table class="table table-borderless">
+        <tr>
+            <th>아이디</th>
+            <td><input type="text" readonly class="form-control" name="id" value="{{ user.id }}"></td>
+        </tr>
+        <tr>
+            <th>현재 비밀번호</th>
+            <td><input type="password" class="form-control" name="currentPW"></td>
+        </tr>
+        <tr>
+            <th>새 비밀번호</th>
+            <td><input type="password" class="form-control" name="newPW"></td>
+        </tr>
+        <tr>
+            <th>비밀번호 확인</th>
+            <td><input type="password" class="form-control" name="chkPW"></td>
+        </tr>
+        <tr>
+            <th>이름</th>
+            <td><input type="text" class="form-control" name="name" placeholder="{{ user.name }}"></td>
+        </tr>
+        <tr>
+            <th>부서</th>
+            <td><input type="text" class="form-control" name="dept" placeholder="{{ user.dept }}"></td>
+        </tr>
+        <tr>
+            <th>연락처</th>
+            <td><input type="text" class="form-control" name="phone" placeholder="{{ user.phone }}"></td>
+        </tr>
+        <tr>
+            <th>가입 일시</th>
+            <td><input type="text" readonly class="form-control" name="joinDate" value="{{ user.joinDate }}"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right"><button type="submit" class="btn btn-primary">사용자 정보 변경</button></td>
+        </tr>
+    </table>
+    </form>
+{% endblock %}

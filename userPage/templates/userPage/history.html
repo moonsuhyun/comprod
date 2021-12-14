@@ -1,0 +1,68 @@
+{% extends "userPage/base.html" %}
+{% block contents %}
+{#    <form method="post">#}
+{#        {% csrf_token %}#}
+{#        <div class="form-check form-check-inline">#}
+{#            <input class="form-check-input" type="radio" name="sort" id="sortRecent" value="recent">#}
+{#            <label class="form-check-label" for="sortRecent">최신순</label>#}
+{#        </div>#}
+{#        <div class="form-check form-check-inline">#}
+{#            <input class="form-check-input" type="radio" name="sort" id="sortOld" value="old">#}
+{#            <label class="form-check-label" for="sortOld">과거순</label>#}
+{#        </div>#}
+{#        <div class="input-group">#}
+{#            <span class="input-group-text">조회기간</span>#}
+{#            <input class="form-control" type="date" name="start">#}
+{#            <input class="form-control" type="date" name="end">#}
+{#            <input class="form-control btn-secondary" type="submit" value="검색">#}
+{#        </div>#}
+{#        <div class="input-group">#}
+{#            <input class="form-control btn-outline-secondary" type="button" value="1개월">#}
+{#            <input class="form-control btn-outline-secondary" type="button" value="3개월">#}
+{#            <input class="form-control btn-outline-secondary" type="button" value="6개월">#}
+{#            <input class="form-control btn-outline-secondary" type="button" value="1년">#}
+{#        </div>#}
+{#    </form>#}
+    <script>
+        function cancelRequest() {
+            if (confirm("물품 요청을 취소합니다.")) {
+                document.getElementById('requestForm').submit();
+            }
+        }
+    </script>
+    <form method="post" id="requestForm">
+    {% csrf_token %}
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">번호</th>
+                <th scope="col">신청품목</th>
+                <th scope="col">신청일자</th>
+                <th scope="col">신청수량</th>
+                <th scope="col">승인자</th>
+                <th scope="col">요청취소</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for l in ledger %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ l.name }}</td>
+                    <td>{{ l.whenn }}</td>
+                    <td>{{ l.quantity }}</td>
+                    {% if l.confId %}
+                        <td>{{ l.confName }}({{ l.confId }})</td>
+                        <td></td>
+                        {% else %}
+                        <td>미승인</td>
+                        <td>
+                            <input type="hidden" name="ledgerId" value="{{ l.id }}">
+                            <input class="form-control btn-danger" type="button" onclick="cancelRequest()" value="취소">
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </form>
+{% endblock %}
