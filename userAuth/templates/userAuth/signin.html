@@ -12,7 +12,6 @@
     let isChecked=false;
     let checkedID=null;
     let isPhoneChecked=false;
-    let checkedPhone=null;
     let code=null;
 
     function formSubmit() {
@@ -25,12 +24,7 @@
             alert("아이디 중복확인을 해주세요.");
             return;
         }
-        if (isPhoneChecked) {
-            if (checkedPhone !== document.getElementById('phone').value) {
-                alert("전화번호 인증을 다시 다시 해주세요.");
-                return;
-            }
-        } else {
+        if (!isPhoneChecked)  {
             alert("전화번호 인증을 해주세요.");
             return;
         }
